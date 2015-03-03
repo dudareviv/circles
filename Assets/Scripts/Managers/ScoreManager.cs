@@ -14,22 +14,23 @@ public class ScoreManager : MonoBehaviour
 
 	public void Awake()
 	{
-		EventManager.CirclePoof.Subscribe(OnPoof);
+        EventManager.MonsterPoof.Subscribe(OnPoof);
 	}
 
 	/**
 	 * Обновляет счет.
 	 */
-	private void OnPoof(Circle circle)
+	private void OnPoof(Monster monster)
 	{
-		scores += CalculateScores(circle);
+        scores += CalculateScores(monster);
 		scoresText.text = scores.ToString();
 	}
 
 	/**
 	 * Производит расчет стоимости объекта.
 	 */
-	private int CalculateScores(Circle circle){
-		return Mathf.CeilToInt(1f / circle.gameObject.transform.localScale.x * scoresCoefficient);
+    private int CalculateScores(Monster monster)
+    {
+        return Mathf.CeilToInt(1f / monster.gameObject.transform.localScale.x * scoresCoefficient);
 	}
 }
